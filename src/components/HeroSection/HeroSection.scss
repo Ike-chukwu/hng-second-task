@@ -1,0 +1,86 @@
+.heros-section-parent {
+  background-image: url(../../Poster.png);
+  height: 80vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .hero-left {
+    display: flex;
+    width: 1400px;
+    margin-inline: auto;
+    height: 100%;
+    gap: 2rem;
+    padding-block: 15rem;
+    flex-direction: column;
+    color: white;
+    align-items: flex-start;
+    .title {
+      h1 {
+        font-size: 4.8rem;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+      }
+    }
+
+    .imdb-rating {
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+
+      .left-side,
+      .right-side {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.2rem;
+
+        .imdb-pic {
+          width: 40px;
+          height: 20px;
+          object-fit: cover;
+        }
+
+        .tomato {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .content {
+      font-size: 1.6rem;
+      width: 400px;
+      line-height: 1.5;
+    }
+
+    .watch-trailer {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #be123c;
+      color: white;
+      display: flex;
+      justify-content: center;
+      outline: none;
+      border: none;
+      cursor: pointer;
+
+      .fa-play{
+        color: #be123c;
+        height: 20px;
+        width: 20px;
+        background: white;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 50%;
+      }
+
+      .trailer-text {
+        text-transform: capitalize;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
