@@ -1,16 +1,24 @@
 import React from "react";
-import './Card.scss'
+import "./Card.scss";
 import tomato from "../../../tomato.png";
 import imdb from "../../../imdb.png";
 import movie from "../../../Poster-1.png";
+import fav from "../../../Favorite.png";
 
-const Card = () => {
+const Card = (props) => {
   return (
-    <div className="card" data-testid=" movie-card">
-      <img src={movie} data-testid="movie-poster" alt="" />
-      <p className="release-date">2001</p>
+    <div className="card" data-testid="movie-card" onClick={props.onClick}>
+      <img
+        src={props.imgSrc}
+        className="movie-poster"
+        data-testid="movie-poster"
+        alt=""
+      />
+      <p className="release-date" data-testid=" movie-release-date">
+        {props.releaseDate}
+      </p>
       <h3 className="movie-title" data-testid=" movie-title">
-        bad boys
+        {props.title}
       </h3>
       <div className="imdb-rating">
         <div className="left-side">
@@ -23,6 +31,7 @@ const Card = () => {
         </div>
       </div>
       <span className="movie-type">action, adventure, horror</span>
+      <img src={fav} className="fav" alt="" />
     </div>
   );
 };

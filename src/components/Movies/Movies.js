@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Movies.scss";
 
 import Card from "./Card/Card";
+import { Link, useNavigate, } from "react-router-dom";
+import { AuthContext } from "../../context";
 
 const Movies = () => {
+
+  const { movies, movieId, setMovieId } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const cardClickHandler = (id) => {
+    setMovieId(id);
+    navigate(`/movies/${id}`);
+  };
+
   return (
     <section className="movies-pack">
       <div className="title-pack">
@@ -14,14 +25,15 @@ const Movies = () => {
       </div>
 
       <div className="movie-card-pack">
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
+        {movies?.map((movie) => (
+          <Card
+            onClick={() => cardClickHandler(movie.id)}
+            key={movie.id}
+            imgSrc={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            title={movie.title}
+            releaseDate={movie.release_date}
+          />
+        ))}
       </div>
     </section>
   );
