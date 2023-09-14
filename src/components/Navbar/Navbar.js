@@ -9,25 +9,6 @@ const Navbar = () => {
     useContext(AuthContext);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  // const fetchMovieFromSearch = async () => {
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       accept: "application/json",
-  //       Authorization:
-  //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjc5MDlmMTc0NzNiNWNkMzJkYzIxNGFmNmZiMDE3MSIsInN1YiI6IjY1MDExMGRkZDdkY2QyMDExYzYwYTVkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f01agXfNCuxLgru1QQotQXMs5q8YvPs07bOgUvzK9TI",
-  //     },
-  //   };
-
-  //   fetch(
-  //     `
-  //     https://api.themoviedb.org/3/search/movie?query=${inputValue}&include_adult=false&language=en-US&page=1`,
-  //     options
-  //   )
-  //     .then((response) => response.json())
-  //     .then((response) => console.log(response))
-  //     .catch((err) => console.error(err));
-  // };
 
   const searchMovieHandler = () => {
     if (inputValue.trim() == "") {
@@ -36,7 +17,6 @@ const Navbar = () => {
       return;
     }
     setError(false);
-    fetchMovieFromSearch();
     navigate(`/search/${inputValue}`);
   };
 

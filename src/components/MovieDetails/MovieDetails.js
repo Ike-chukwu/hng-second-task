@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./MovieDetails.scss";
 import collage from "../../Group 52.png";
-import img from "../../Rectangle-29.png";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const MovieDetails = () => {
         headers: {
           accept: "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjc5MDlmMTc0NzNiNWNkMzJkYzIxNGFmNmZiMDE3MSIsInN1YiI6IjY1MDExMGRkZDdkY2QyMDExYzYwYTVkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f01agXfNCuxLgru1QQotQXMs5q8YvPs07bOgUvzK9TI", // Replace with your TMDb API key
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzI2MGJiMDJkODljMDc3MzhmMDFhZDVhMDkxMmFmNSIsInN1YiI6IjY1MDExMGRkZDdkY2QyMDExYzYwYTVkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QtpF3GXQn3mJd47XRjzmYON_-W5quK1rjHyMyWuBqoQ", // Replace with your TMDb API key
         },
       };
 
@@ -26,6 +26,7 @@ const MovieDetails = () => {
         );
 
         if (!response.ok) {
+          console.log(response.status);
           throw new Error("Error fetching data");
         }
 
@@ -44,7 +45,7 @@ const MovieDetails = () => {
 
   if (!movieInView) {
     // Data is still loading, you can render a loader or a message here
-    return <div>Loading...</div>;
+    return <Loader/>
   }
 
   // Render the movie details
@@ -64,16 +65,18 @@ const MovieDetails = () => {
             <div className="bottom-left-top-inner-content">
               <h4 className="movie">
                 <span data-testid="movie-title">{movieInView.title}</span>
-                <span data-testid="movie-release-date">{new Date(movieInView.release_date).toUTCString()}</span>
+                <span data-testid="movie-release-date">
+                  {new Date(movieInView.release_date).toUTCString()} 
+                </span>
                 <span data-testid="movie-runtime">
-                  {movieInView.runtime / 60}
+                  {(movieInView.runtime / 60).toFixed(2)}
                 </span>
               </h4>
               {movieInView.genres.map((category) => (
-                <div className="category-movie">{category.name}</div>
+                <div className="category-movie" key={Math.random()}>
+                  {category.name}
+                </div>
               ))}
-              {/* <div className="category-movie">action</div>
-              <div className="category-movie">drama</div> */}
             </div>
             <p className="movie-story" data-testid="movie-overview">
               {movieInView.overview}

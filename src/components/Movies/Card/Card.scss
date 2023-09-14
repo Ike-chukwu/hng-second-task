@@ -55,12 +55,17 @@
       text-transform: capitalize;
     }
 
-    .fav{
+    .fa-heart{
         position: absolute;
         top: 2.8%;
         right: 15%;
         width: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
         height: 30px;
+        color: black;
+        background: #D1D5DB;
     }
     
   }

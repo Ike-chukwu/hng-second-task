@@ -67,7 +67,7 @@
       border: none;
       cursor: pointer;
 
-      .fa-play{
+      .fa-play {
         color: #be123c;
         height: 20px;
         width: 20px;
@@ -80,6 +80,72 @@
       .trailer-text {
         text-transform: capitalize;
         text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .heros-section-parent {
+    .hero-left {
+      width: 1000px;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .heros-section-parent {
+    .hero-left {
+      width: 850px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .heros-section-parent {
+    .hero-left {
+      width: 100%;
+      padding-inline: 2rem;
+      padding-block: 9rem;
+      align-items: center;
+      text-align: center;
+
+      .title {
+        h1 {
+          font-size: 2.5rem;
+        }
+      }
+
+      .content {
+        font-size: 1.4rem;
+        width: 100%;
+      }
+
+      .watch-trailer {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 1.5rem 1rem;
+        background: #be123c;
+        color: white;
+        display: flex;
+        justify-content: center;
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+        .fa-play {
+          height: 15px;
+          width: 15px;
+          line-height: 15px;
+          font-size: 1rem;
+        }
+
+        .trailer-text {
+          text-transform: capitalize;
+          text-transform: uppercase;
+          font-size: 1.4rem;
+        }
       }
     }
   }

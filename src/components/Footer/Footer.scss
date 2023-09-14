@@ -28,3 +28,28 @@
     text-transform: capitalize;
   }
 }
+
+
+@media (max-width: 900px) {
+  .footer {
+    .icons {
+      gap: 2rem;
+
+      i {
+        font-size: 1.4rem;
+      }
+    }
+
+    .second {
+      gap: 2.4rem;
+      flex-direction: column;
+      text-align: center;
+      font-size: 1.4rem;
+    }
+
+    .copyright {
+      font-size: 1.4rem;
+      text-align: center;
+    }
+  }
+}

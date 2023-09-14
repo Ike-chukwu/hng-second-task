@@ -50,3 +50,19 @@
     }
   }
 }
+
+
+
+@media (max-width: 1100px) {
+  .sidebar-layout {
+    flex: 0.3;
+    padding-inline: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar-layout {
+    display: none;
+    font-size: 1.4rem;
+  }
+}

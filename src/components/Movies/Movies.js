@@ -7,7 +7,7 @@ import { AuthContext } from "../../context";
 
 const Movies = () => {
 
-  const { movies, movieId, setMovieId } = useContext(AuthContext);
+  const { movies, setMovieId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const cardClickHandler = (id) => {
@@ -32,6 +32,7 @@ const Movies = () => {
             imgSrc={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             title={movie.title}
             releaseDate={movie.release_date}
+            id={movie.id}
           />
         ))}
       </div>
