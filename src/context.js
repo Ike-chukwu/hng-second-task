@@ -4,13 +4,14 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [movies, setMovies] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
   const [movieId, setMovieId] = useState();
   const [inputValue, setInputValue] = useState("");
   const [favs, setFavs] = useState([]);
 
   const fetchMovies = async () => {
-    setLoading(true);
+    setError(undefined);
     const options = {
       method: "GET",
       headers: {
@@ -24,21 +25,21 @@ export const AuthProvider = ({ children }) => {
         "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
         options
       );
-
+      if(!data.ok){
+        throw ("API failure occured")
+      }
       const response = await data.json();
       const movies = response.results.slice(0, 10);
       setMovies(movies);
       setLoading(false);
     } catch (error) {
-      console.log(error);
-      setLoading(true);
+      setError(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!movies) {
-      fetchMovies();
-    }
+    fetchMovies();
   }, [movies]);
 
   return (
@@ -55,6 +56,8 @@ export const AuthProvider = ({ children }) => {
         setInputValue,
         favs,
         setFavs,
+        error,
+        setError,
       }}
     >
       {children}

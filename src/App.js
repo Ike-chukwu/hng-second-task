@@ -6,12 +6,15 @@ import { useContext } from "react";
 import { AuthContext } from "./context";
 import Loader from "../src/components/Loader/Loader";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Error from "./components/Error/Error";
 
 function App() {
-  const { loading} = useContext(AuthContext);
-  return loading ? (
-    <Loader />
-  ) : (
+  const { loading, error, movies } = useContext(AuthContext);
+  // render a loader while data loads from api
+  if (loading) return <Loader />;
+  // render error component when api request fails
+  if (error) return <Error />;
+  return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,4 +26,3 @@ function App() {
 }
 
 export default App;
-

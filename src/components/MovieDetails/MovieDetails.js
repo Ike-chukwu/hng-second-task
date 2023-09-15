@@ -3,10 +3,13 @@ import "./MovieDetails.scss";
 import collage from "../../Group 52.png";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [movieInView, setMovieData] = useState();
+  const [movieInViewLoadingState, setMovieInViewLoadingState] = useState(true);
+  const [errorState, setErrorState] = useState();
   let utcString;
   useEffect(() => {
     const fetchMovie = async () => {
@@ -26,7 +29,6 @@ const MovieDetails = () => {
         );
 
         if (!response.ok) {
-          console.log(response.status);
           throw new Error("Error fetching data");
         }
 
@@ -34,8 +36,10 @@ const MovieDetails = () => {
         setMovieData(data);
         const date = new Date(data.release_date); // Create a Date object for January 1, 2010
         utcString = date.toUTCString();
+        setMovieInViewLoadingState(false);
       } catch (error) {
-        console.error(error);
+        setErrorState(error);
+        setMovieInViewLoadingState(false);
         // Handle the error state here if needed
       }
     };
@@ -43,10 +47,12 @@ const MovieDetails = () => {
     fetchMovie();
   }, [id]);
 
-  if (!movieInView) {
-    // Data is still loading, you can render a loader or a message here
-    return <Loader/>
+  if (movieInViewLoadingState) {
+    // render a loader while data loads from api
+    return <Loader />;
   }
+  // render error component while api request fails
+  if (errorState) return <Error />;
 
   // Render the movie details
   return (
@@ -66,9 +72,9 @@ const MovieDetails = () => {
               <h4 className="movie">
                 <span data-testid="movie-title">{movieInView.title}</span>
                 <span data-testid="movie-release-date">
-                  {new Date(movieInView.release_date).toUTCString()} 
+                  {new Date(movieInView.release_date).toUTCString()}
                 </span>
-                <span data-testid="movie-runtime">
+                <span data-testid="movie-runtime" style={{marginLeft:"1rem"}}>
                   {(movieInView.runtime / 60).toFixed(2)}
                 </span>
               </h4>
@@ -113,7 +119,7 @@ const MovieDetails = () => {
             <div className="top-rated-filtered-tag">
               <i className="fas fa-filter"></i> more watch options
             </div>
-            <img src={collage} className="collage-img" alt="" />
+            <img src={`https://image.tmdb.org/t/p/w200${movieInView.poster_path}`} className="collage-img" alt="" />
           </div>
         </div>
       </div>

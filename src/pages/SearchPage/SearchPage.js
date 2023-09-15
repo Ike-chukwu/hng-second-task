@@ -5,14 +5,15 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import Error from "../../components/Error/Error";
 const SearchPage = () => {
-  const [loadingSearchedResult, setLoadingSearchedResult] = useState(false);
+  const [loadingSearchedResult, setLoadingSearchedResult] = useState(true);
   const [searchedResult, setSearchedResult] = useState();
+  const [error, setError] = useState();
   const { inputValue } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const fetchMovieFromSearch = async () => {
-    setLoadingSearchedResult(true);
     const options = {
       method: "GET",
       headers: {
@@ -33,7 +34,10 @@ const SearchPage = () => {
         setSearchedResult(response);
         setLoadingSearchedResult(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setError(err);
+        setLoadingSearchedResult(false);
+      });
   };
 
   const cardClickHandler = (id) => {
@@ -44,9 +48,15 @@ const SearchPage = () => {
     fetchMovieFromSearch();
   }, []);
 
-  if (!searchedResult) {
+   // render a loader while data loads from api
+  if (loadingSearchedResult) {
     return <Loader />;
-  } else if (searchedResult.results.length < 1) {
+  } 
+    // render error component when api request fails
+  if(error){
+    return <Error/>
+  }
+  if (searchedResult.results.length < 1) {
     return (
       <div>
         <p className="no-results">Sorry!No results found</p>
@@ -55,7 +65,7 @@ const SearchPage = () => {
         </Link>
       </div>
     );
-  }
+  } 
   return (
     <section className="section-grid">
       {searchedResult?.results.map((result) => (
