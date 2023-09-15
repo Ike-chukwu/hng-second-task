@@ -32,7 +32,7 @@ npm start
 
 Open your web browser and visit http://localhost:3000 to access the Movie Database website.
 
-Features
-Search for movies by title.
-Click on a movie card to view detailed information.
+Features are:
+Search for movies by title,
+Click on a movie card to view detailed information,
 Click on the heart icon to like or unlike a movie
