@@ -8,7 +8,7 @@ const Error = () => {
       <p className="error-header">Looks like you're lost😒</p>
       <h4 className="error-status-code">404</h4>
       <Link to="/">
-        <button className="btn-home">Back to home</button>
+        <button className="btn-home">Back to home or Refresh the page</button>
       </Link>
     </div>
   );
